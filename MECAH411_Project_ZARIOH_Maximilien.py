@@ -125,9 +125,8 @@ Since the satellite is in orbit and not attached to any ground support (free-fre
 # %%
 # The first 3 modes are rigid body modes
 # Flexible modes start from mode 4 (index 3)
-fig, axes = plt.subplots(3, 2, figsize=(10, 15))
+fig, axes = plt.subplots(1, 5, figsize=(25, 5))
 axes = axes.flatten()
-axes[0].axis('off') # Hide the first subplot
 
 # Define geometry at rest (x and y coordinates)
 # Solar arrays: Tip_Left(-8), Mid_Left(-4), Center(0), Mid_Right(4), Tip_Right(8)
@@ -144,7 +143,7 @@ solar_idx = [4, 3, 1, 5, 6]
 # Plot first 5 flexible modes
 for i in range(5):
     mode_idx = i + 3
-    ax = axes[i + 1]
+    ax = axes[i]
 
     # Get mode shape
     phi = eigenvectors[:, mode_idx]
@@ -924,7 +923,7 @@ mask = t_time <= T_period
 M_c_signal[mask] = 40 * np.sin(np.pi * t_time[mask] / 10)
 
 # Plot the torque signal
-fig, ax = plt.subplots(figsize=(12, 4))
+fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot(t_time, M_c_signal, 'b-', linewidth=1.5)
 ax.set_xlabel('Time [s]')
 ax.set_ylabel('Torque M_c(t) [Nm]')
@@ -1001,7 +1000,7 @@ for mode_idx in flexible_mode_indices:
     theta_c_response += psi_theta_c * z_r
 
 # Plot θ_c(t)
-fig, ax = plt.subplots(figsize=(12, 5))
+fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot(t_time, theta_c_response, 'b-', linewidth=1)
 ax.set_xlabel('Time [s]')
 ax.set_ylabel('θ_c(t) [rad]')
@@ -1061,7 +1060,7 @@ for mode_idx in flexible_mode_indices:
 y2_plus_8theta = y2_response + L_solar * theta_c_response
 
 # Plot comparison
-fig, axes = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+fig, axes = plt.subplots(2, 1, figsize=(10, 10), sharex=True)
 
 # θ_c(t)
 axes[0].plot(t_time, theta_c_response, 'b-', linewidth=1, label='θ_c(t)')
@@ -1151,7 +1150,7 @@ for mode_idx in flexible_mode_indices:
 y2_plus_8theta_with_TMD = y2_with_TMD + L_solar * theta_c_with_TMD
 
 # Plot comparison: With and Without TMD
-fig, axes = plt.subplots(2, 1, figsize=(14, 10), sharex=True)
+fig, axes = plt.subplots(2, 1, figsize=(10, 10), sharex=True)
 
 # θ_c(t)
 axes[0].plot(t_time, theta_c_response, 'b-', linewidth=1, alpha=0.7, label='Without TMD')
